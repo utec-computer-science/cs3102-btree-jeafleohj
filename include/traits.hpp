@@ -1,56 +1,53 @@
 #ifndef TRAITS_HPP
 #define TRAITS_HPP
-
+#include <ostream>
 #include <vector>
 #include <iostream>
+#include "types.hpp"
 
 template <typename T>
-class SS_Traits{
+class SS_Traits {
 public:
-    typedef T  value_t;
+    typedef T value_t;
     typedef std::vector<value_t> container_t;
-    typedef std::vector<value_t*> pcontainer_t;
     typedef typename container_t::iterator iterator_t;
-  
-    class simple_search{
-    public:
-        bool operator() (container_t a, value_t v){
-            return false;
+    struct simple_search {
+        int operator()(container_t a, const value_t& v) {
+            int pos;
+            for(pos=0; pos<a.size()&& a[pos]<v; pos++);
+            return pos;
         }
     };
 
-    class post_order_print{
-    public:
-        void operator() (void){
-            std::cout << "post order" << std::endl;
+    struct post_order_print {
+        std::ostream& operator()(std::ostream& out) {
+            out << "post order" << std::endl;
+            return out;
         }
     };
 
+    const static tree::type_print tprint = tree::type_print::postorder;
     typedef simple_search functor_t;
     typedef post_order_print print_t;
 };
 
 template <typename T>
-class BS_Traits{
+class BS_Traits {
 public:
-    typedef T  value_t;
+    typedef T value_t;
     typedef std::vector<value_t> container_t;
-    typedef std::vector<value_t*> pcontainer_t;
     typedef typename container_t::iterator iterator_t;
-  
-    class binary_search{
+
+    class binary_search {
     public:
-        bool operator() (container_t a, value_t v){
-            return false;
-        }
+      int operator()(container_t a, value_t v) { return 0; }
     };
 
-    class pre_order_print{
+    class pre_order_print {
     public:
-        void operator() (void){
-            std::cout << "pre order" << std::endl;
-        }
+      void operator()(void) { std::cout << "pre order" << std::endl; }
     };
+
     typedef binary_search functor_t;
     typedef pre_order_print print_t;
 };
