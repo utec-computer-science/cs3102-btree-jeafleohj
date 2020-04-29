@@ -11,7 +11,6 @@ struct BTree {
     typedef typename T::value_t value_t;
     typedef typename T::container_t container_t;
     typedef typename T::functor_t functor_t;
-    typedef typename T::print_t print_t;
 private:
     struct Node {
         typedef typename T::value_t value_t;
@@ -38,7 +37,6 @@ private:
         }
     };
     Node *root;
-    print_t print;
     functor_t search;
 
 public:
@@ -67,7 +65,7 @@ public:
         std::move(std::begin(pnode->ptrs)+mid+1, std::end(pnode-> ptrs),
                   std::begin(right-> ptrs));
 
-       left->n_keys = mid;
+        left->n_keys = mid;
         right->n_keys = Order-mid-1;
 
         parent->insert(pos, mid_value);
@@ -109,9 +107,11 @@ public:
             split(root,pos,true);
         }
     }
-
-    bool find(const value_t value = 0) const {
-        return false;//find(root, value);
+    bool find(Node* pnode, value_t value) {
+        return false;
+    }
+    bool find(const value_t value = 0){
+        return find(root, value);
     }
 
 private:
@@ -139,7 +139,6 @@ private:
         return out;
     }
 public:
-
     friend  std::ostream &operator<<(std::ostream &out, BTree& tree) {
         if(type_print::postorder == T::tprint) {
             return tree.postorder(out, tree.root);

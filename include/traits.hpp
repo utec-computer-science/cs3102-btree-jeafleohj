@@ -19,16 +19,8 @@ public:
         }
     };
 
-    struct post_order_print {
-        std::ostream& operator()(std::ostream& out) {
-            out << "post order" << std::endl;
-            return out;
-        }
-    };
-
     const static tree::type_print tprint = tree::type_print::postorder;
     typedef simple_search functor_t;
-    typedef post_order_print print_t;
 };
 
 template <typename T>
@@ -40,16 +32,23 @@ public:
 
     class binary_search {
     public:
-      int operator()(container_t a, value_t v) { return 0; }
-    };
-
-    class pre_order_print {
-    public:
-      void operator()(void) { std::cout << "pre order" << std::endl; }
+      int operator()(container_t a, value_t v) {
+          int low = 0;
+          int high = a.size() - 1;
+          while (low != high) {
+              int mid = (low + high + 1)/2 ;
+              if (a[mid] < v) {
+                  low = mid;
+              } else {
+                  high = mid - 1;
+              }
+          }
+          return low + 1;
+      }
     };
 
     typedef binary_search functor_t;
-    typedef pre_order_print print_t;
+    const static tree::type_print tprint = tree::type_print::preorder;
 };
 
 #endif
