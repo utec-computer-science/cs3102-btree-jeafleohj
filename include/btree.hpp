@@ -2,6 +2,7 @@
 #define BTREE_HPP
 #include <iostream>
 #include <iterator>
+#include <ostream>
 #include <vector>
 #include "types.hpp"
 namespace tree {
@@ -108,6 +109,14 @@ public:
         }
     }
     bool find(Node* pnode, value_t value) {
+        container_t t=container_t(pnode->keys.begin(),
+                                  pnode->keys.begin()+pnode->n_keys);
+        int pos = search(t, value);
+        if(pnode->keys[pos] == value) return true;
+        if(pnode->ptrs[pos]) {
+            return find(pnode->ptrs[pos],value);
+        }
+
         return false;
     }
     bool find(const value_t value = 0){
