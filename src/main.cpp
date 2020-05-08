@@ -23,6 +23,7 @@ int main() {
     tree.insert(30);
     tree.insert(10);
     tree.insert(60);
-
+    tree.insert(40);
+    tree.insert(80);
     cout << tree << endl;
 }

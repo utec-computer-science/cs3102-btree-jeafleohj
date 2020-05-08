@@ -84,12 +84,12 @@ struct TreeHelper<BNode<ValueNode>,ValueNode,B_NODE_FLAGXX>{
         }
 
         if((*ppnode)->children[pos]) {
-            state_t cstate = insert(ppnode, val);
+            state_t cstate = insert(&(*ppnode)->children[pos], val);
             if( cstate == state_t::OVERFLOW ) {
                 split(ppnode, pos);
-            } else {
-                (*ppnode)->insertInNode(val, pos);
-            }
+            } 
+        } else {
+            (*ppnode)->insertInNode(val, pos);
         }
         return (*ppnode)->state();
     }
@@ -101,7 +101,6 @@ struct TreeHelper<BNode<ValueNode>,ValueNode,B_NODE_FLAGXX>{
         node_t* left = new node_t(order);
         node_t* right = new node_t(order);
         value_t mid_value = focus->data[mid];
-
         std::move(std::begin(focus->data),
                   std::begin(focus->data)+mid,
                   std::begin(left->data));
@@ -120,12 +119,13 @@ struct TreeHelper<BNode<ValueNode>,ValueNode,B_NODE_FLAGXX>{
         left->sizeOfContainer = mid;
         right->sizeOfContainer = order-mid-1;
 
-        (*ppnode)->insert(pos, mid_value);
         (*ppnode)->children[pos] = left;
         (*ppnode)->children[pos+1] = right;
-
         if(root) {
+            (*ppnode)->data[0] = mid_value;
             focus->sizeOfContainer = 1;
+        } else {
+            (*ppnode)->insertInNode(pos, mid_value);
         }
     }
 
