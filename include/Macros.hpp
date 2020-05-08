@@ -7,4 +7,6 @@
 #define B_NODE_ORDER 4
 #define B_PLUS_NODE_ORDER 4
 
+enum class state_t{OVERFLOW, NORMAL, UNDERFLOW};
+
 #endif

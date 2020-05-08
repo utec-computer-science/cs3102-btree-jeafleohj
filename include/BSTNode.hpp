@@ -8,7 +8,7 @@ using namespace std;
 
 template<typename T>
 class BSTNode{
-public: 
+public:
     typedef T value_t;
 
     value_t data;

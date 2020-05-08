@@ -4,7 +4,7 @@ class  Point_2d {
     value_t __x;
     value_t __y;
 
-public: 
+public:
     Point_2d(value_t _x = 0, value_t _y = 0)
         :__x(_x), __y(_y){
     }

@@ -15,16 +15,16 @@ struct NodeTraits{
 template <typename ValueNode>
 struct NodeTraits< BSTNode<ValueNode>, ValueNode >{
     static const int  flag_type = BST_NODE_FLAGXX;
-  
+
 };
 
-template <typename ValueNode> 
+template <typename ValueNode>
 struct NodeTraits< BNode<ValueNode>, ValueNode >{
     static const int  flag_type = B_NODE_FLAGXX;
 };
 
 // BPlusNode
-template <typename ValueNode> 
+template <typename ValueNode>
 struct NodeTraits< BPlusNode<ValueNode>, ValueNode >{
     static const int  flag_type = B_PLUS_NODE_FLAGXX;
 };

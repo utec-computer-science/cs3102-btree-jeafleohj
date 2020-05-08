@@ -25,6 +25,24 @@ public:
           sizeOfContainer(0)
     {}
 
+    state_t state() {
+        if( sizeOfContainer == order ) {
+            return state_t::OVERFLOW;
+        }
+        return state_t::NORMAL;
+    }
+
+    void insertInNode(const value_t& val, int pos) {
+        int index;
+        for(index=sizeOfContainer; index>pos; --index) {
+            data[index] = data[index-1];
+            children[index+1] =  children[index];
+        }
+        sizeOfContainer++;
+        data[pos] = val;
+        children[pos+1] =  children[pos];
+    }
+
     void insertToContainer(value_t value){
         int index = sizeOfContainer - 1;
 
@@ -49,12 +67,12 @@ public:
         }
 
         // Obtiene el hijo al que debe ir para insertar
-        BNode* child = getNextChild(value);
-        child->insert(value);
+        //BNode* child = getNextChild(value);
+        //child->insert(value);
 
-        if (child->isContainerFull()) {
-            splitChild(child,order);
-        }
+        //if (child->isContainerFull()) {
+        //    splitChild(child,order);
+        //}
     }
 
     BNode* getNextChild(value_t value){

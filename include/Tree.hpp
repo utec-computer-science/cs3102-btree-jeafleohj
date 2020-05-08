@@ -19,18 +19,18 @@ public:
     unsigned int order;
 
     Tree(unsigned int order = 0)
-        :root(nullptr),
-         order(order)
+        : root(nullptr),
+          order(order)
     {}
 
     void insert(const value_t& val){
         add<NodeTraits<node_t, value_t>::flag_type>(&root, val, order);
     }
 
-    template <int Flag> 
+    template <int Flag>
     void add(node_t**, const value_t&, unsigned int order);
 
-    template <int Flag> 
+    template <int Flag>
     void print(node_t**, std::ostream&);
 
     ~Tree(void){
@@ -42,7 +42,7 @@ public:
     }
 };
 
-template <typename Node> 
+template <typename Node>
 std::ostream& operator<<(std::ostream &out, Tree<Node> tree) {
     tree.print(out);
     return out;

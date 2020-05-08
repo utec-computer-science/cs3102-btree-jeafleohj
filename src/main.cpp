@@ -17,9 +17,9 @@
 int main() {
     typedef BSTNode<float> bst_node;
     typedef BNode<int> b_node;
-    typedef Tree<bst_node> bst_tree;
+    typedef Tree<b_node> b_tree;
 
-    bst_tree tree(4);
+    b_tree tree(4);
     tree.insert(30);
     tree.insert(10);
     tree.insert(60);
